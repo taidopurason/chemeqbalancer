@@ -13,7 +13,7 @@ def lahenda(km):
     try:
         ns = nullspace(np.array(km).T)
         min = abs(ns[0][0])
-        for i in range(1, len(ns)-1):
+        for i in range(1, len(ns)):
             if abs(ns[i][0]) < min:
                 min = abs(ns[i][0])
         if min > 1/100000000:

@@ -4,15 +4,24 @@ def pooled(valem):
 
 def summaarne(valem, elist, c=1):
     sum = [0]*len(elist)
-    element = ""
     järgmine = []
-    sulud = 0
+    sulud, laeng, laeng_arv, laeng_märk, element = 0, 0, "", "", ""
     n = 1
     for i in range(len(valem)):
-        if valem[i].islower():
+        if valem[i] == "{":
+            laeng = 1
+            continue
+        elif laeng:
+            if valem[i].isnumeric():
+                laeng_arv = laeng_arv + valem[i]
+            elif valem[i] == "}":
+                laeng = 0
+            else:
+                laeng_märk = valem[i]    
+            continue
+        elif valem[i].islower():
             element = element + valem[i]
             continue
-        
         if sulud > 0:
             if valem[i] == "(":
                 sulud += 1
@@ -54,12 +63,17 @@ def summaarne(valem, elist, c=1):
         for i in range(len(elist)):
                 if element == elist[i]:
                     sum[i] += n*c
+                    
+    if laeng_märk != "":
+        if laeng_arv == "":
+            laeng_arv = "1"
+        sum[-1] = int(laeng_märk + laeng_arv)
         
     return sum
 
 def elemendid(valem):
     el = []
-    c = 0
+    c, laeng = 0, 0
     for i in range(len(valem)):
         if valem[i].isalpha():
             if valem[i].islower():
@@ -67,7 +81,12 @@ def elemendid(valem):
             else:
                 el.append(valem[i])
                 c += 1
-    return list(set(el))
+        elif valem[i] == "{":
+                laeng = 1
+    if laeng:
+        return list(set(el)) + ["laeng"]
+    else:
+        return list(set(el))
 
 def komp_maatriks(valem):
     elist = elemendid(valem)
@@ -78,7 +97,7 @@ def komp_maatriks(valem):
     return maatriks
 
 def mvis(km,valem):
-    print(" "*19, elemendid(valem))
+    print("{:<20}{}".format("KOMPOSITSIOON", elemendid(valem)))
     for i,j in zip(km, pooled(valem)[0] + pooled(valem)[1]):
         print('{:<20}{}'.format(j, i))
         
