@@ -10,7 +10,6 @@ def summaarne(valem, elist, c=1):
     for i in range(len(valem)):
         if valem[i] == "{":
             laeng = 1
-            continue
         elif laeng:
             if valem[i].isnumeric():
                 laeng_arv = laeng_arv + valem[i]
@@ -18,42 +17,39 @@ def summaarne(valem, elist, c=1):
                 laeng = 0
             else:
                 laeng_märk = valem[i]    
-            continue
-        elif valem[i].islower():
-            element = element + valem[i]
-            continue
-        if sulud > 0:
-            if valem[i] == "(":
+        elif sulud > 0:
+            if valem[i] == "(" or valem[i] == "[":
                 sulud += 1
-            elif valem[i] == ")":
+            elif valem[i] == ")" or valem[i] == "]":
                 sulud -= 1
                 if sulud == 0:
                     continue
             järgmine.append(valem[i])
-            continue           
-        if valem[i].isnumeric():
+        elif valem[i].islower():
+            element = element + valem[i]
+        elif valem[i].isnumeric():
             if valem[i-1].isnumeric():
                 n = 10*n + int(valem[i])
             else:
                 n = int(valem[i])
-            continue
-        
-        if järgmine != []:
-            rsum = summaarne("".join(järgmine), elist, n*c)
-            for j in range(len(elist)):
-                sum[j] = sum[j] + rsum[j]
-            järgmine = []
-        elif element != "":
-            for j in range(len(elist)):
-                if element == elist[j]:
-                    sum[j] += n*c
-        
-        if valem[i] == "(":
-            sulud += 1
-            continue
+        else:
+            
+            if järgmine != []:
+                rsum = summaarne("".join(järgmine), elist, n*c)
+                for j in range(len(elist)):
+                    sum[j] = sum[j] + rsum[j]
+                järgmine = []
+            elif element != "":
+                for j in range(len(elist)):
+                    if element == elist[j]:
+                        sum[j] += n*c
+            
+            if valem[i] == "(" or valem[i] == "[":
+                sulud += 1
+                continue
 
-        element = valem[i]
-        n = 1
+            element = valem[i]
+            n = 1
         
     if järgmine != []:
         rsum = summaarne("".join(järgmine), elist, n*c)
