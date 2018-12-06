@@ -1,6 +1,8 @@
 from analüüs import *
 from algoritm import *
+from Tkinter import *
 
+    
 valem_test1 = "CH3(CH2)3OH + O2 -> CO2 + H2O"
 valem_test2 = "Cu{2+} + OH{-} = Cu(OH)2"
 valem_test3 = "[Cu]{2+} + OH{-} = Cu(OH)2"
@@ -14,3 +16,4 @@ try:
     print("\nTASAKAALUSTATUD VALEM\n" + tasakaalustatud(c,valem))
 except:
     print("Valemit pole võimalik tasakaalustada.")
+

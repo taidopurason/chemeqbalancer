@@ -12,12 +12,10 @@ def lahenda(km):
     vastus = []
     try:
         ns = nullspace(np.array(km).T)
-        print(ns)
         min = abs(ns[0][0])
         for i in range(1, len(ns)):
             if abs(ns[i][0]) < min:
                 min = abs(ns[i][0])
-        print(min)
         if min > 1/100000000:
             for i in range(len(ns)):
                 vastus.append(round(ns[i][0]/min, 1))
