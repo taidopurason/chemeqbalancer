@@ -104,3 +104,4 @@ def tasakaalustatud(c, valem):
 def koef_list(c, valem): #c - koefitsendid, listid 0 - lähteained, 1 - saadusained, 2 - lähteainete koef., 3 - saadusainete koef
     valem = pooled(valem)
     return valem[0], valem[1], [abs(i) for i in c[:len(valem[0])]], [abs(i) for i in c[len(valem[0]):]]
+

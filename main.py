@@ -1,9 +1,11 @@
 from analyys import *
 from algoritm import *
+
 try:
     from tkinter import *
 except:
     from Tkinter import *
+
 
     
 valem_test1 = "C8H16,1-octene + O2 -> CO2 + H2O(l)"
@@ -15,6 +17,10 @@ valem = input("Näited korrektselt sisestatud valemitest:\n{}\n{}\n{}\n\nSisesta
 km = komp_maatriks(valem)
 c = lahenda(km)
 mvis(km,valem)
+
+
+
+print(koef_list(c, valem))
 
 try:
     print("\nTASAKAALUSTATUD VALEM\n" + tasakaalustatud(c,valem))
