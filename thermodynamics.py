@@ -1,7 +1,7 @@
 from thermopy import nasa9polynomials as nasa9
 from analysis import koef_list
 
-def print_therm_data(c, valem):
+def therm_data(c, valem):
     db = nasa9.Database()
     stoichiometry=koef_list(c, valem)
     try:
@@ -22,7 +22,7 @@ def print_therm_data(c, valem):
         reacts_coefs=tuple(reacts_coefs)
         prods_coefs=tuple(prods_coefs)
         reaction1 = nasa9.Reaction(293, reacts, prods, reacts_coefs, prods_coefs)
-        print("Antud reaktsiooni standartse entroopia muut on {:.2f} J/(mol*k), standartse entalpia muut on {:.2f} kJ/mol ja standartse Gibbsi vaba energia muut on {:.2f} kJ/mol.".format(reaction1.entropy_reaction(), reaction1.enthalpy_reaction()/1000, reaction1.gibbs_energy_reaction()/1000))
+        return reaction1.entropy_reaction(), reaction1.enthalpy_reaction()/1000, reaction1.gibbs_energy_reaction()/1000
         
     except:
-        print("Andmebaasis ei ole piisavalt andmeid arvutamiseks.")
+        return
