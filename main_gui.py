@@ -1,6 +1,9 @@
-from analüüs import *
-from algoritm import *
-from tkinter import *
+from analysis import *
+from algorithm import *
+try:
+    from tkinter import *
+except:
+    from Tkinter import *
 
 def tasakaalusta():
     valem = sisend.get()
